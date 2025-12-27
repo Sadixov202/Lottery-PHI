@@ -13,3 +13,20 @@
   100% { transform: rotate(360deg); }
 }
 
+.board-item.completed {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.slogan{
+    font-family: "Vito Compressed AZ";
+    font-size: 108px;
+    text-align: center;
+    background-image: linear-gradient(90deg, #B37E10 0%, #F8DD7B 27%, #FDF1A4 47.6%, #F8DD7B 67.2%, #B37E10 100%); /* Define the gradient */
+    -webkit-background-clip: text; /* Clip the background to the text shape */
+    background-clip: text; /* Standard property (for future compatibility) */
+    -webkit-text-fill-color: transparent; /* Make the text itself transparent */
+    text-fill-color: transparent; /* Standard property */
+    color: #000; /* Fallback color for older browsers */
+}

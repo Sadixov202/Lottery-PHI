@@ -29,16 +29,41 @@ export class AppComponent implements OnInit{
   }
 
   onSelectProduct(productId: number) {
-    this.selectedProduct = this.player.find((item: any) => item.id === productId);
-    this.selectedProduct.isCompleted = true;
+    const product = this.player.find((item: any) => item.id === productId);
+    if (product && !product.isCompleted) {
+      this.selectedProduct = product;
+      this.selectedProduct.isCompleted = true;
+    }
   }
 
   selecetProduct(productId: number) {
+    // Проверяем, выбран ли продукт
+    if (!this.selectedProduct) {
+      return;
+    }
+
+    // Проверяем, не идет ли уже загрузка
+    if (this.isLoading) {
+      return;
+    }
+
+    // Очищаем предыдущих победителей
+    this.winners = null;
+    
+    // Включаем индикатор загрузки
     this.isLoading = true;
+
+    // Запускаем таймер на 2 секунды
     setTimeout(() => {
-      this.appService.onPlay({productId: productId}).subscribe((res) => {
-        this.winners = res?.items;
-        this.isLoading = false;
+      this.appService.onPlay({productId: productId}).subscribe({
+        next: (res) => {
+          this.winners = res?.items;
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error('Ошибка при получении победителей:', err);
+          this.isLoading = false;
+        }
       });
     }, 2000);
   }

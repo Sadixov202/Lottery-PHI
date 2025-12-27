@@ -5,7 +5,7 @@
     ), url(assets/images/bg.png);">
 
     <div class="board">
-      <div class="board-item {{item.isCompleted ? '' : 'preload'}}" (click)="onSelectProduct(item.id)" *ngFor="let item of player">{{item?.name}}</div>
+      <div class="board-item {{item.isCompleted ? '' : 'preload'}}" (click)="!item.isCompleted && onSelectProduct(item.id)" *ngFor="let item of player">{{item?.name}}</div>
     </div>
     <div class="content">
       <div class="content-heading">
@@ -13,6 +13,7 @@
         <img src="assets/images/m-logo.svg" class="img-fluid logos" alt="logo">
       </div>
       <div class="content-list">
+        <div class="slogan" *ngIf="!isLoading && !winners">LOTEREYA</div>
         <div class="spiner" *ngIf="isLoading"></div>
         <span *ngFor="let user of winners" class="content-name">{{user?.fullname}}</span>
       </div>
