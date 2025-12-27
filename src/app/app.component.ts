@@ -11,6 +11,8 @@ export class AppComponent implements OnInit{
   title = 'PI-loterea';
   player: any;
   winners: any;
+  selectedProduct: any;
+  isLoading: boolean = false;
 
   constructor(private appService: AppService) {
 
@@ -26,10 +28,19 @@ export class AppComponent implements OnInit{
     });
   }
 
+  onSelectProduct(productId: number) {
+    this.selectedProduct = this.player.find((item: any) => item.id === productId);
+    this.selectedProduct.isCompleted = true;
+  }
+
   selecetProduct(productId: number) {
-    this.appService.onPlay({productId: productId}).subscribe((res) => {
-      this.winners = res?.items;
-    });
+    this.isLoading = true;
+    setTimeout(() => {
+      this.appService.onPlay({productId: productId}).subscribe((res) => {
+        this.winners = res?.items;
+        this.isLoading = false;
+      });
+    }, 2000);
   }
 
 }

@@ -9,13 +9,14 @@ import { Observable } from 'rxjs';
 export class AppService extends HttpsService {
 
   public PLAYER = 'player';
+  public PRODUCTS = 'products';
 
   constructor(public http: HttpClient) {
     super();
   }
 
   public getPlayer(params: any = {}): Observable<any> {
-    return this.get(this.http, `${this.PLAYER}`, params);
+    return this.get(this.http, `${this.PRODUCTS}`, params);
   }
 
   public onPlay(params: any = {}): Observable<any> {

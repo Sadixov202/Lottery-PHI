@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+.board-item{
+    &:nth-child(12){
+        word-break: break-all;
+    }
+}

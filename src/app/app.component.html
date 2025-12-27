@@ -1,8 +1,23 @@
-<h1>App component</h1>
-<div>
-  <ul>
-    <li *ngFor="let product of player">
-      <button (click)="selecetProduct(product.id)">{{product.name}}</button>
-    </li>
-  </ul>
-</div>
+<div class="base-container" style="background-image:    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.6)
+    ), url(assets/images/bg.png);">
+
+    <div class="board">
+      <div class="board-item {{item.isCompleted ? '' : 'preload'}}" (click)="onSelectProduct(item.id)" *ngFor="let item of player">{{item?.name}}</div>
+    </div>
+    <div class="content">
+      <div class="content-heading">
+        <img src="assets/images/ph-logo.svg" class="img-fluid logos" alt="logo">
+        <img src="assets/images/m-logo.svg" class="img-fluid logos" alt="logo">
+      </div>
+      <div class="content-list">
+        <div class="spiner" *ngIf="isLoading"></div>
+        <span *ngFor="let user of winners" class="content-name">{{user?.fullname}}</span>
+      </div>
+      <div class="content-action">
+        <a href="javascript:void(0)" (click)="selecetProduct(this.selectedProduct.id)" class="btn">BAŞLA</a>
+      </div>
+    </div>
+  </div>
